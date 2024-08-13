@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}People{% endblock %}
+{% block header %}
+<ul class="filter-options">
+    <li>
+        <input type="checkbox" id="filter-alive" checked>
+        <label for="filter-alive">Alive</label>
+    </li>
+    <li>
+        <input type="checkbox" id="filter-dead" checked>
+        <label for="filter-dead">Dead</label>
+    </li>
+</ul>
+{% endblock %}
+{% block content %}
+<body>    
+    <script src="static/statusFiltering.js"></script>    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <div class="people-grid">
+        {% for person in people %}
+        <div class="person" data-status="{{ person.status }}">
+            <div class="person-image">
+                <img src="{{ url_for('static', filename='images/' + person.name + '.jpg') }}" alt="{{ person.name }}">
+            </div>
+                <p><strong>ID:</strong> {{ person.id }}</p>
+                <p><strong>Name:</strong> {{ person.name }}</p>
+                <p><strong>Status:</strong> {{ person.status }}</p>
+                <p><strong>Items in Use:</strong> {{ person.items_use }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}

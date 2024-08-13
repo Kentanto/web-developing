@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Picked Names{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <h1>Most Recent Appearances</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Time Picked</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for picked_name in picked_names %}
+            <tr>
+                <td>{{ picked_name.id }}</td>
+                <td>{{ picked_name.name }}</td>
+                <td>{{ picked_name.count }}</td>
+                <td>{{ picked_name.time_picked }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Teams{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <h1>Teams</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Team Name</th>
+                <th>Member Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.team_name }}</td>
+                <td>{{ team.member_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

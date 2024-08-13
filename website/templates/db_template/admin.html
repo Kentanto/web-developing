@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Admin{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <h1>Admin Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Seed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admin %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.Admin }}</td>
+                <td>{{ admin.Status }}</td>
+                <td>{{ admin.Seed }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

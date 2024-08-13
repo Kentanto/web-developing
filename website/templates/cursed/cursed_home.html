@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %} - Deathgame</title>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="//gravityscript.github.io/grav.js"></script>
+    
+
+<!--
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+-->
+
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
+<body>   
+  <div id="RimShadow-right"></div> 
+  <div id="RimShadow-left"></div>
+  <div id="RimShadow-top"></div>
+  <div id="RimShadow-bottom"></div>
+    <div class="container">        
+        <div class="btn-container-cursed">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="gone">
+                <span class="navbar-toggler-icon"></span>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto btn-container-cursed">
+                        <li class="nav-item"><a class="nav-link btn" href="/">Home</a></li> 
+                        <li class="nav-item"><a class="nav-link btn" href="/cursed_home">Cursed Home</a></li>
+                        <li class="nav-item"><a class="nav-link btn" href="/">Coming Soon...</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <a class='ohGodGoBack' href="/">OH GOD GO BACK!!!</a>
+            <a class="btn" id="check-modify-btn">Check/Modify A Person</a>
+            <a class="btn" onclick="kill_person()">Kill A Person</a>
+            <a class="btn" onclick="add_or_remove()">Add/Remove</a>
+            <a class="btn" onclick="create_modify_team()">Create Or Modify A Team</a>
+            <a class="btn" href="{{ url_for('head.view_dead_people') }}">Dead Status</a>
+            <a class="btn" href="{{ url_for('head.view_people') }}">Status</a>
+            <a class="btn" onclick="reset_program()">Reset Game</a>
+            <a class="btn" onclick="display_picked_names()">Pick Names</a>
+            <a class="btn" onclick="kill_count()">Kill Count</a>
+            <a class="btn" href="{{ url_for('head.view_items') }}">Items</a>
+            <a class="btn" onclick="on_opening_admin()">Mass Kill</a>
+            <a class="btn" href="{{ url_for('head.view_picked_names') }}">Appearances</a>
+            <a class="btn" href="{{ url_for('head.view_teams') }}">Teams</a>
+        </div>
+    </div>
+    <div class="under_bar"></div>
+    <div id="check_and_modify">
+      <div class="form-container">
+          <h1>Check or Modify a Person</h1>
+          <form id="person-form" action="/check_modfiy_person" method="post">
+              <label for="person_name">Person's Name:</label>
+              <input required type="text" id="person_name" name="person_name">
+              
+              <label for="modify_person">Modify this person?</label>
+              <select id="modify_person" name="modify_person">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+              </select>
+              <label for="modification_type">Modification Type:</label>
+              <select id="modification_type" name="modification_type">
+                  <option value="alive">Alive</option>
+                  <option value="injured">Injured</option>                    
+                  <option value="disabled">Disabled</option>
+              </select>
+              <div id="injuredByInput" style="display: none;">
+                  <label for="additional_info">Injured by?</label>
+                  <input type="text" id="additional_info" name="additional_info">
+              </div>               
+              <button type="submit">Submit</button>
+          </form>
+          <div id="person-info"></div>
+          <div> did you mean?: <div id="spell-suggestions"></div></div>
+      </div>
+  </div>
+</body>

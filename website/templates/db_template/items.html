@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Items{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <h1>Item Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.availability }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

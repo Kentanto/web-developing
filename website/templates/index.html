@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+
+<body>
+    <script src="static/slide_In_functions.js"></script>
+    <script src="static/autocorrect.js"></script>
+    <div id="main-page-content">     
+    <div id="RimShadow-right"></div> 
+    <div id="RimShadow-left"></div>
+    <div id="RimShadow-top"></div>
+    <div id="RimShadow-bottom"></div>
+    <div id="overlapshadow-top"></div>
+    <div id="overlapshadow-bottom"></div>
+    <div id="overlapshadow-left"></div>
+    <div id="overlapshadow-right"></div>
+    <div class="container">
+        <div class="btn-container">
+            <a class="btn" id="check-modify-btn">Check/Modify A Person</a>
+            <a class="btn" id="kill-person-btn">Kill A Person</a>
+            <a class="btn" onclick="add_or_remove()">Add/Remove</a>
+            <a class="btn" onclick="create_modify_team()">Create Or Modify A Team</a>
+            <a class="btn" href="{{ url_for("head.view_dead_people") }}">Dead Status</a>
+            <a class="btn" href="{{ url_for("head.view_people") }}">Status</a>
+            <a class="btn" id="reset-game-btn">Reset Game</a>
+            <a class="btn" id="Pick_Names">Pick Names</a>
+            <a class="btn" onclick="kill_count()">Kill Count</a>
+            <a class="btn" href="{{ url_for("head.view_items") }}">Items</a>
+            <a class="btn" onclick="on_opening_admin()">Mass Kill</a>
+            <a class="btn" href="{{ url_for("head.view_picked_names") }}">Appearances</a>
+            <a class="btn" href="{{ url_for("head.view_teams") }}">Teams</a>
+        </div>
+    </div>
+    <div class="under_bar"></div>
+    </div>
+
+    <div id="password-field-container" class="form-container">
+        <form id="password-form" action="#" method="post">
+            <label for="site_password" style="left:20px; top:20px; font-size: 18px;">Access Code:</label>
+            <input id="site_password" name="site_password" type="password">
+        </form>
+    </div>
+
+    <div id="check_and_modify">
+        <div class="form-container">
+            <h1>Check or Modify a Person</h1>
+            <form id="person-form" action="/check_modfiy_person" method="post">
+                <label for="person_name">Person's Name:</label>
+                <input required type="text" id="person_name" name="person_name">
+                
+                <label for="modify_person">Modify this person?</label>
+                <select id="modify_person" name="modify_person">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <label for="modification_type">Modification Type:</label>
+                <select id="modification_type" name="modification_type">
+                    <option value="alive">Alive</option>
+                    <option value="injured">Injured</option>
+                    <option value="disabled">Disabled</option>                  
+                    <option value="Custom">Other</option>
+                </select>
+                <div id="Extra_Info" style="display: none;">
+                    <label for="additional_info">label text</label>
+                    <input type="text" id="additional_info" name="additional_info">
+                </div>               
+                <button type="submit">Submit</button>
+            </form>
+            <div id="person-info"></div>
+            <div> did you mean?: <div id="check-spell-suggestions"></div></div>
+        </div>
+    </div>
+    <div id="kill_Person_container" class="hidden">
+        <div class="form-container" style="width: 400px;">
+            <h1 style="font-size: 36px;">Kill Person</h1>
+            <form id="kill-person-form" action="/kill_person" method="post">
+                <label for="target_person" style="font-size: 27px;">Target Person:</label>
+                <input required type="text" id="target_person" name="target_person" style="width: 100%; padding: 8px; font-size: 24px;">
+                
+                <label for="killer" style="font-size: 27px;">Killer:</label>
+                <input required type="text" id="killer" name="killer" style="width: 100%; padding: 8px; font-size: 24px;">
+                
+                <button class="main_gradient" type="submit" style="width: 100%; padding: 10px; font-size: 27px;">Kill</button>
+                
+            </form>
+            
+            <div id="person-info"></div>
+                <div> did you mean?: <div id="kill-spell-suggestions"></div></div>
+        </div>
+    </div>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="picked-people-container-picker">
+    {% if picked_people_data %}
+        {% for person in picked_people_data %}
+        <div class="picked-person-picker">
+            <div class="person-image-picker">
+                <img src="{{ url_for('static', filename='images/' + person.name + '.jpg') }}" alt="{{ person.name }}">
+            </div>
+            <div class="person-text-picker">
+                <p>{{ person.name }}</p>
+                <p>{{ person.items_use }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-picks-message">
+            <p>No characters have been picked yet. Pick some to see them here</p>
+        </div>
+    {% endif %}
+</div>
+</body>
+{% endblock %}
