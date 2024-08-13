@@ -62,6 +62,7 @@ function Validate_password() {
 }
 
 function pick_people() {
+    accessPassword = Validate_password(); if (accessPassword == Password){
     const formData = new FormData();
     
     const xhr = new XMLHttpRequest();
@@ -97,8 +98,8 @@ function pick_people() {
         console.error('Form submission error');
     };
     xhr.send(formData);
+    }else{alert("You do not have access to this function.");}
 }
-
 function Kill_Person(){
     accessPassword = Validate_password(); if (accessPassword == Password){
     //when kill_person_btn clicked, slide the form out and add listeners
