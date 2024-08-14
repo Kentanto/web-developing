@@ -1,6 +1,7 @@
 html { 
     font-family: sans-serif; 
-    background:var(--background); 
+    background:var(--background);
+    scrollbar-width: none;
     color:var(--text);
     padding: 1rem; 
     --text: #e6f0fc;
@@ -162,6 +163,7 @@ html {
     z-index: 10;
     box-shadow: -10px 0px 10px var(--accent);
     transition: right 0.7s ease;
+    overflow: hidden;
 }
 
 #check-spell-suggestions {
@@ -291,6 +293,11 @@ html {
     transform-style: preserve-3d;
 }
 
+.container {
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
 .btn {
     width: 200px;
     height: 60px;
@@ -315,6 +322,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    overflow: hidden;
 }
 
 .btn-container-cursed {
@@ -505,7 +513,7 @@ html {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     z-index: 0;
-    grid-gap: 3px;
+    grid-gap: 5px;
 }
 
 .person {
@@ -581,12 +589,12 @@ html {
     align-items: center;
     width: 120px;
     text-align: center;
+    margin: 10px;
 }
 
 .person-image-picker {
     width: 300px;
     height: 300px;
-    overflow: hidden;
 }
 
 .person-image-picker img {
@@ -595,7 +603,3 @@ html {
     object-fit: cover;
 }
 
-.person-text-Picker {
-    margin-top: 5px;
-    font-size: 14px;
-}

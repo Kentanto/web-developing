@@ -22,7 +22,6 @@
             <a class="btn" id="kill-person-btn">Kill A Person</a>
             <a class="btn" onclick="add_or_remove()">Add/Remove</a>
             <a class="btn" onclick="create_modify_team()">Create Or Modify A Team</a>
-            <a class="btn" href="{{ url_for("head.view_dead_people") }}">Dead Status</a>
             <a class="btn" href="{{ url_for("head.view_people") }}">Status</a>
             <a class="btn" id="reset-game-btn">Reset Game</a>
             <a class="btn" id="Pick_Names">Pick Names</a>
@@ -98,11 +97,7 @@
         <div class="picked-person-picker">
             <div class="person-image-picker">
                 <img src="{{ url_for('static', filename='images/' + person.name + '.jpg') }}" alt="{{ person.name }}">
-            </div>
-            <div class="person-text-picker">
-                <p>{{ person.name }}</p>
-                <p>{{ person.items_use }}</p>
-            </div>
+            </div>            
         </div>
         {% endfor %}
     {% else %}

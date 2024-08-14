@@ -84,9 +84,6 @@ function pick_people() {
                 personDiv.innerHTML = `
                     <div class="person-image-picker">
                         <img src="/static/images/${person.name}.jpg" alt="${person.name}">
-                    </div>
-                    <div class="person-text-picker">
-                        <p>${person.name}</p>
                     </div>`;
                 container.appendChild(personDiv);
             });

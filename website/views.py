@@ -54,7 +54,7 @@ def view_items():
 @head.route("/people")
 def view_people():
     #Shows everythin on a person
-    people = People.query.all()
+    people = People.query.order_by(People.name.asc()).all()
     return render_template("db_template/people.html", people=people)
 
 @head.route("/picked_names")
@@ -127,31 +127,36 @@ def get_person_info():
         else:
             return jsonify({"html": "<p>Person not found</p>"})
         
-    
-@head.route("/pick_people", methods=["POST"])
+@head.route('/pick_people', methods=['POST'])
 def pick_people():
-    #Again do i really need to?
     Picked_People = []
     alive_people = People.query.filter_by(status="alive").all()
 
     num_to_pick = random.randint(2, 3)
     picked_people = random.sample(alive_people, num_to_pick)
+
     for person in picked_people:
-        picked_character = Picked_names.query.filter_by(name=person.name).first()
+        modified_name = person.name
+        if random.random() < 0.5:
+            modified_name = f"{person.name}_1"
+            
+        picked_character = Picked_names.query.filter_by(name=modified_name).first()
         if picked_character:
             picked_character.count += 1
             picked_character.time_picked = datetime.now().replace(microsecond=0)
         else:
-            new_picked_character = Picked_names(name=person.name, count=1, time_picked=datetime.now().replace(microsecond=0))
+            new_picked_character = Picked_names(name=modified_name, count=1, time_picked=datetime.now().replace(microsecond=0))
             db.session.add(new_picked_character)
         
         Picked_People.append({
-        "name":person.name,
-        "status": person.status,
-        "items_use": person.items_use})
+            "name": modified_name,
+            "status": person.status,
+            "items_use": person.items_use
+        })
         db.session.commit()
     
     return jsonify(Picked_People)
+    
 
 
 
